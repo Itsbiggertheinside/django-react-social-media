@@ -1,30 +1,35 @@
 from django.shortcuts import render
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView, Response
 from .models import Profile, Post
 from .serializers import ProfileSerializer, PostSerializer
+from .permissions import IsOwnerOrReadOnly
 
 
 
-class DevProfileApiView(APIView):
+class DevProfileApiView(generics.RetrieveUpdateAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+    def get_object(self, slug=None):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Profile, slug=slug)
+
+    def put(self, request, *args, **kwargs):
+        return super(DevProfileApiView, self).update(request, *args, **kwargs)
+
+
+class DevPostApiView(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+    def get(self, request, *args, **kwargs):
+        return super(DevPostApiView, self).list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return super(DevPostApiView, self).create(request, *args, **kwargs)
     
-    def get(self, request, slug=None):
-        profile = get_object_or_404(Profile, slug=slug)
-        serializer = ProfileSerializer(instance=profile)
-        return Response(serializer.data)
-
-
-class DevPostApiView(APIView):
-
-    def get(self, request):
-        posts = Post.objects.all()
-        serializer = PostSerializer(instance=posts, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = PostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user.profile)
