@@ -10,7 +10,7 @@ class FollowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Follow
-        exclude = ('id',)
+        exclude = ('id', 'user',)
 
     def get_followers_list(self, instance):
         return list(instance.followers_list.values_list('slug', flat=True))
@@ -47,7 +47,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = '__all__'
+        exclude = ('id',)
 
 
 class ProfilePhotoSerializer(serializers.ModelSerializer):
