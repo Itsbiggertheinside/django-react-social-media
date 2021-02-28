@@ -1,23 +1,37 @@
 from rest_framework import serializers
-from .models import Profile, Post, Follow
+from .models import Profile, Post, Comment, Follow
 
 
 
 class FollowSerializer(serializers.ModelSerializer):
 
-    followed = serializers.SerializerMethodField()
+    followers_list = serializers.SerializerMethodField()
+    followeds_list = serializers.SerializerMethodField()
 
     class Meta:
         model = Follow
-        exclude = ('id', 'follower',)
+        exclude = ('id',)
 
-    def get_followed(self, instance):
-        return list(instance.followed.values_list('slug', flat=True))
+    def get_followers_list(self, instance):
+        return list(instance.followers_list.values_list('slug', flat=True))
+
+    def get_followeds_list(self, instance):
+        return list(instance.followeds_list.values_list('slug', flat=True))
+
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    user = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Comment
+        exclude = ('id', 'post',)
 
 
 class PostSerializer(serializers.ModelSerializer):
 
     user = serializers.StringRelatedField(read_only=True)
+    comment_set = CommentSerializer(read_only=True, many=True)
 
     class Meta:
         model = Post

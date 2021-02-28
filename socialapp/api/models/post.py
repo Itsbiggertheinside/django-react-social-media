@@ -18,6 +18,16 @@ class Post(models.Model):
     #     return reverse('post', kwargs={'slug': self.slug})
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return 'Post Id: {}, Author: {}, Comment: {}'.format(self.post.id, self.user.slug, self.content)
+
+
 class ArchivedPost(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
