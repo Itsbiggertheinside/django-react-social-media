@@ -1,6 +1,6 @@
-from rest_framework import viewsets, mixins
+from rest_framework import generics, viewsets, mixins, permissions
 from .models import Profile, Post
-from .serializers import ProfileSerializer, PostSerializer
+from .serializers import ProfileSerializer, ProfilePhotoSerializer, PostSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -20,3 +20,12 @@ class PostViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.Gener
     def perform_create(self, serializer):
         profile = self.request.user.profile
         serializer.save(user=profile)
+
+
+class ProfilePhotoUpdateAPIView(generics.UpdateAPIView):
+    serializer_class = ProfilePhotoSerializer
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def get_object(self):
+        profile = self.request.user.profile
+        return profile

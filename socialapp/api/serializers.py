@@ -53,4 +53,4 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ProfilePhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('image',)
+        fields = ('picture',)
