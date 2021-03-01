@@ -32,23 +32,27 @@ class PostSerializer(serializers.ModelSerializer):
 
     user = serializers.StringRelatedField(read_only=True)
     comment_set = CommentSerializer(read_only=True, many=True)
+    likes = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = '__all__'
+
+    def get_likes(self, instance):
+        return list(instance.likes.values_list('slug', flat=True))
 
 
 class ProfileSerializer(serializers.ModelSerializer):
 
     user = serializers.StringRelatedField(read_only=True)
     picture = serializers.ImageField(read_only=True)
-    post_set = PostSerializer(read_only=True, many=True)
+    posts = PostSerializer(read_only=True, many=True)
     follow_set = FollowSerializer(read_only=True, many=True)
 
     class Meta:
         model = Profile
         exclude = ('id',)
-
+    
 
 class ProfilePhotoSerializer(serializers.ModelSerializer):
     class Meta:

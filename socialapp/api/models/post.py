@@ -5,9 +5,10 @@ from .profile import Profile
 
 
 class Post(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts')
     image = models.ImageField()
     content = models.TextField(max_length=2000, null=True, blank=True)
+    likes = models.ManyToManyField(Profile, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True)
 
