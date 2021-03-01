@@ -6,11 +6,9 @@ class App extends React.Component {
 
   render() {
     return(
-      <div className="container">
-
-        
-
-      </div>
+      <Container>
+        <p>sdasds</p>
+      </Container>
     )
   }
 
