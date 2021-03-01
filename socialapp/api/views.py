@@ -1,4 +1,4 @@
-from rest_framework import generics, viewsets, mixins, permissions
+from rest_framework import generics, viewsets, mixins, permissions, filters
 from .models import Profile, Post
 from .serializers import ProfileSerializer, ProfilePhotoSerializer, PostSerializer
 from .permissions import IsOwnerOrReadOnly
@@ -8,13 +8,14 @@ class ProfileViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsOwnerOrReadOnly, )
+    # filter_backends = (filters.SearchFilter, )
+    # search_fields = ('slug',)
     lookup_field = 'slug'
 
 
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = (IsOwnerOrReadOnly, )
-    lookup_field = 'slug'
 
     def get_queryset(self):
         queryset = Post.objects.all()
