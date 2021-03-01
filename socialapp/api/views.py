@@ -1,35 +1,22 @@
-from django.shortcuts import render
-from rest_framework import status, generics
-from rest_framework.generics import get_object_or_404
-from rest_framework.views import APIView, Response
+from rest_framework import viewsets, mixins
 from .models import Profile, Post
 from .serializers import ProfileSerializer, PostSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
-
-class DevProfileApiView(generics.RetrieveUpdateAPIView):
+class ProfileViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsOwnerOrReadOnly, )
-
-    def get_object(self, slug=None):
-        slug = self.kwargs.get('slug')
-        return get_object_or_404(Profile, slug=slug)
-
-    def put(self, request, *args, **kwargs):
-        return super(DevProfileApiView, self).update(request, *args, **kwargs)
+    lookup_field = 'slug'
 
 
-class DevPostApiView(generics.ListCreateAPIView):
+class PostViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsOwnerOrReadOnly, )
-
-    def get(self, request, *args, **kwargs):
-        return super(DevPostApiView, self).list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return super(DevPostApiView, self).create(request, *args, **kwargs)
+    lookup_field = 'slug'
     
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user.profile)
+        profile = self.request.user.profile
+        serializer.save(user=profile)

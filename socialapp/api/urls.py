@@ -1,9 +1,11 @@
-from django.urls import path
-from .views import DevProfileApiView, DevPostApiView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import ProfileViewSet, PostViewSet
+
+router = DefaultRouter()
+router.register(r'profile', ProfileViewSet, basename='profile')
+router.register(r'posts', PostViewSet, basename='posts')
 
 urlpatterns = [
-
-    path('profile/<slug:slug>/', DevProfileApiView.as_view(), name='profile'),
-    path('posts/', DevPostApiView.as_view(), name='post-list'),
-
+    path('', include(router.urls)),
 ]
