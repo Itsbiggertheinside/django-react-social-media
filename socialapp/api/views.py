@@ -5,7 +5,7 @@ from .permissions import IsOwnerOrReadOnly
 
 
 class ProfileViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.select_related('user').all()
     serializer_class = ProfileSerializer
     permission_classes = (IsOwnerOrReadOnly, )
     # filter_backends = (filters.SearchFilter, )
@@ -14,7 +14,7 @@ class ProfileViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.select_related('user').prefetch_related('likes').all()
     serializer_class = PostSerializer
     permission_classes = (IsOwnerOrReadOnly, )
     lookup_field = 'slug'
