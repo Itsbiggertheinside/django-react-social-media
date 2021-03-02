@@ -33,6 +33,7 @@ class PostSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
     comment_set = CommentSerializer(read_only=True, many=True)
     likes = serializers.SerializerMethodField()
+    absolute_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -40,6 +41,9 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_likes(self, instance):
         return list(instance.likes.values_list('slug', flat=True))
+
+    def get_absolute_url(self, obj):
+        return obj.get_absolute_url()
 
 
 class ProfileSerializer(serializers.ModelSerializer):

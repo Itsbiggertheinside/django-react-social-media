@@ -4,9 +4,8 @@ import Menu from '../partials/Menu.js'
 import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 
-class HomePage extends React.Component {
+class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -16,10 +15,10 @@ class HomePage extends React.Component {
       <div className="mt-5">
         <Container>
           <Row>
-            <Col md="4">
+            <Col xs="12">
               <Menu />
             </Col>
-            <Col md="8">
+            <Col xs="12">
               <Post />
             </Col>
           </Row>
@@ -31,4 +30,4 @@ class HomePage extends React.Component {
 }
 
 
-export default HomePage;
+export default ProfilePage;
