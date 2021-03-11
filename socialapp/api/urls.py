@@ -1,12 +1,16 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ProfileViewSet, PostViewSet, ProfilePhotoUpdateAPIView
+from .views import ProfileViewSet, PostViewSet, PostCreateAPIView, PostLikeAPIView
+
 
 router = DefaultRouter()
-router.register(r'profile', ProfileViewSet, basename='profile')
-router.register(r'posts', PostViewSet, basename='posts')
+router.register('', PostViewSet, basename='post')
+router.register('profile', ProfileViewSet, basename='profile')
 
 urlpatterns = [
+
     path('', include(router.urls)),
-    path('profile-photo/update/', ProfilePhotoUpdateAPIView.as_view(), name='profile-photo-update'),
+    path('post-create', PostCreateAPIView.as_view(), name='post-create'),
+    path('post-like', PostLikeAPIView.as_view(), name='post-like'),
+
 ]

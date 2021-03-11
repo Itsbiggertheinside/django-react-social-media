@@ -1,64 +1,65 @@
 from rest_framework import serializers
-from .models import Profile, Post, Comment, Follow
+from django.contrib.auth.models import User
+from .models import Profile, Post, Likes, Comment, ArchivedPost, Follows, Following
 
 
-
-class FollowSerializer(serializers.ModelSerializer):
-
-    followers_list = serializers.SerializerMethodField()
-    followeds_list = serializers.SerializerMethodField()
+class FollowsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Follow
-        exclude = ('id', 'user',)
+        model = Follows
+        fields = '__all__'
 
-    def get_followers_list(self, instance):
-        return list(instance.followers_list.values_list('slug', flat=True))
 
-    def get_followeds_list(self, instance):
-        return list(instance.followeds_list.values_list('slug', flat=True))
+class FollowingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Following
+        fields = '__all__'
+
+
+class LikesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Likes
+        fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
 
-    user = serializers.StringRelatedField(read_only=True)
-
     class Meta:
         model = Comment
-        exclude = ('id', 'post',)
+        fields = '__all__'
 
 
 class PostSerializer(serializers.ModelSerializer):
 
-    user = serializers.StringRelatedField(read_only=True)
+    likes_set = serializers.SerializerMethodField(read_only=True)
     comment_set = CommentSerializer(read_only=True, many=True)
-    likes = serializers.SerializerMethodField()
-    absolute_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = '__all__'
 
-    def get_likes(self, instance):
-        return list(instance.likes.values_list('slug', flat=True))
-
-    def get_absolute_url(self, obj):
-        return obj.get_absolute_url()
+    def get_likes_set(self, obj):
+        likes = []
+        for like in obj.likes_set.all():
+            likes.append(like.profile.slug)
+        return likes
 
 
 class ProfileSerializer(serializers.ModelSerializer):
 
-    user = serializers.StringRelatedField(read_only=True)
-    picture = serializers.ImageField(read_only=True)
     posts = PostSerializer(read_only=True, many=True)
-    follow_set = FollowSerializer(read_only=True, many=True)
 
     class Meta:
         model = Profile
-        exclude = ('id',)
-    
+        fields = '__all__'
 
-class ProfilePhotoSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
+
+    profile = ProfileSerializer()
+
     class Meta:
-        model = Profile
-        fields = ('picture',)
+        model = User
+        fields = ('username', 'profile')

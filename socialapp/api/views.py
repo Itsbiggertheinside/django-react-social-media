@@ -1,40 +1,40 @@
 from rest_framework import generics, viewsets, mixins, permissions, filters
-from .models import Profile, Post
-from .serializers import ProfileSerializer, ProfilePhotoSerializer, PostSerializer
+from rest_framework.response import Response
+from django.contrib.auth.models import User
+from .models import Profile, Post, Likes, Comment, ArchivedPost, Follows, Following
+from .serializers import UserSerializer, ProfileSerializer, PostSerializer, FollowsSerializer, FollowingSerializer, CommentSerializer, LikesSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
-class ProfileViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
-    queryset = Profile.objects.select_related('user').all()
-    serializer_class = ProfileSerializer
+class ProfileViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = (IsOwnerOrReadOnly, )
-    # filter_backends = (filters.SearchFilter, )
-    # search_fields = ('slug',)
-    lookup_field = 'slug'
+    lookup_field = 'username'
 
 
-class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.select_related('user').prefetch_related('likes').all()
+class PostViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsOwnerOrReadOnly, )
-    lookup_field = 'slug'
 
-    # def get_queryset(self):
-    #     queryset = Post.objects.all()
-    #     username = self.request.query_params.get('username', None)
-    #     if username is not None:
-    #         queryset = queryset.filter(user__slug=username)
-    #     return queryset
-    
+
+class PostCreateAPIView(generics.CreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
     def perform_create(self, serializer):
         profile = self.request.user.profile
-        serializer.save(user=profile)
+        serializer.save(profile=profile)
 
 
-class ProfilePhotoUpdateAPIView(generics.UpdateAPIView):
-    serializer_class = ProfilePhotoSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+class PostLikeAPIView(generics.CreateAPIView):
+    serializer_class = LikesSerializer
 
-    def get_object(self):
+    def get_object(self, pk=None):
+        return generics.get_object_or_404(Post, pk=pk)
+
+    def perform_create(self, serializer):
         profile = self.request.user.profile
-        return profile
+        post = self.get_object()
+        serializer.save(profile=profile)
