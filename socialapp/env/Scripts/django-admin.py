@@ -1,4 +1,4 @@
-#!C:\Users\udemy\Desktop\Github Repositories\django-react-social-media\socialapp\env\Scripts\python.exe
+#!c:\users\sdeni\onedrive\belgeler\github repositories\django-react-social-media\socialapp\env\scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
