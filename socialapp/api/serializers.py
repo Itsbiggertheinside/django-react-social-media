@@ -43,7 +43,7 @@ class PostSerializer(serializers.ModelSerializer):
     def get_likes_set(self, obj):
         likes = []
         for like in obj.likes_set.all():
-            likes.append(like.profile.slug)
+            likes.append(like.profile.user.username)
         return likes
 
 

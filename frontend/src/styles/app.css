@@ -1,0 +1,23 @@
+:root {
+    --root_blue: 81,182,255;
+    --text_primary: 63,65,77;
+    --text_secondary: 119,125,116;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.root_blue {
+    color: rgb(var(--root_blue));
+}
+
+.text_primary {
+    color: rgb(var(--text_primary));
+}
+
+.text_secondary {
+    color: rgb(var(--text_secondary));
+}
