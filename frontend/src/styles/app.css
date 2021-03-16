@@ -1,7 +1,9 @@
 :root {
     --root_blue: 81,182,255;
+    --root_pink: 222,49,99;
     --text_primary: 63,65,77;
     --text_secondary: 119,125,116;
+    --background_secondary: rgba(236, 233, 233, 0.233);
 }
 
 * {
@@ -10,14 +12,42 @@
     box-sizing: border-box;
 }
 
-.root_blue {
-    color: rgb(var(--root_blue));
+.router-link-active span {
+    color: rgb(var(--root_pink));
 }
 
-.text_primary {
+.btn:focus, input {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+a, a span {
+    color: initial;
+    font-weight: 600;
+}
+
+.btn.btn-outline-light {
+    border: none;
+}
+.btn span {
     color: rgb(var(--text_primary));
 }
 
-.text_secondary {
-    color: rgb(var(--text_secondary));
+.card {
+    border: none !important;
+}
+
+.card-body {
+    padding: .7rem .2rem !important;
+}
+
+.post-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-username {
+    font-weight: 500;
 }

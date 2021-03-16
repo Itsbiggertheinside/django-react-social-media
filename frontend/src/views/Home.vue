@@ -1,28 +1,23 @@
 <template>
-  <div class="home">
-    <b-container fluid>
-      <b-row>
-        <b-col sm='0' md='4'>
-          <LeftMenu />
-        </b-col>
-        <b-col>
-          <h1>Content</h1>
-        </b-col>
-        <b-col sm='0' md='4'>
-          <RightMenu />
-        </b-col>
-      </b-row>
-    </b-container>
+  <div id="home">
+    <h3>Hikayeler</h3>
+    <div class='my-4'>
+      <Stories />
+    </div>
+    <div class='my-4'>
+      <Content />
+    </div>
   </div>
 </template>
 
 <script>
-import LeftMenu from '../components/home/LeftMenu';
-import LeftMenu from '../components/home/RightMenu';
+import Content from '../components/home/Content.vue';
+import Stories from '../components/home/Stories.vue';
 
 export default {
   components: {
-    LeftMenu, RightMenu
+    Stories,
+    Content
   }
 };
 
