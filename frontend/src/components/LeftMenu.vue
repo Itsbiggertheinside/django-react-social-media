@@ -3,7 +3,7 @@
         <b-nav vertical>
             <b-navbar-brand class="mx-4 mt-3">Social Network</b-navbar-brand>
             <div id="profile-informations" class="text-center mt-5">
-                <b-avatar variant="primary" src="https://www.w3schools.com/howto/img_avatar.png" size="6rem" ></b-avatar>
+                <b-avatar variant="primary" src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80" size="6rem" ></b-avatar>
                 <p class="font-weight-bolder h4 mt-3">Tufan Kılınç</p>
                 <p class="text-muted h6">@anothermayk</p>
                 <b-row class="mt-4">

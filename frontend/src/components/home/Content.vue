@@ -2,11 +2,11 @@
     <div>
         <h3>Gönderiler</h3>
         <b-card-group columns class="my-4">
-            <b-card img-src="https://media.nature.com/lw800/magazine-assets/d41586-020-02779-3/d41586-020-02779-3_18481780.jpg" img-top>
+            <b-card img-src="https://images.unsplash.com/photo-1485550409059-9afb054cada4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
+                            <b-avatar src="https://loremflickr.com/320/240" size="1.7rem"></b-avatar>
                             <span class="ml-2 profile-username">anothermayk</span>
                         </div>
                         <div class="post-actions">
@@ -27,21 +27,21 @@
             </b-card>
         
         
-            <b-card border-variant="light" img-src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/VAN_CAT.png/1200px-VAN_CAT.png" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=2" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">perisnato</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>57</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>11</span>
                             </div>
                         </div>
                     </div>
@@ -52,21 +52,21 @@
             </b-card>
         
         
-            <b-card border-variant="light" img-src="https://i.guim.co.uk/img/media/8a13052d4db7dcd508af948e5db7b04598e03190/0_294_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bcaa4eed2c1e6dab61c41a61e41433d9" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=3" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">qualify</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>97</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>2</span>
                             </div>
                         </div>
                     </div>
@@ -76,21 +76,21 @@
                 </footer>
             </b-card>
 
-            <b-card border-variant="light" img-src="https://i.natgeofe.com/n/3861de2a-04e6-45fd-aec8-02e7809f9d4e/02-cat-training-NationalGeographic_1484324.jpg" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=4" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">estern</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>46</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>18</span>
                             </div>
                         </div>
                     </div>
@@ -100,21 +100,21 @@
                 </footer>
             </b-card>
 
-            <b-card border-variant="light" img-src="https://placekitten.com/g/300/450" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=5" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">llurazll</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>114</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>6</span>
                             </div>
                         </div>
                     </div>
@@ -124,21 +124,21 @@
                 </footer>
             </b-card>
 
-            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1570534536531-c3def02ad855?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Y3V0ZSUyMGNhdHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1501426026826-31c667bdf23d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=376&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=6" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">tensorflow</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>44</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>3</span>
                             </div>
                         </div>
                     </div>
@@ -148,21 +148,21 @@
                 </footer>
             </b-card>
 
-            <b-card border-variant="light" img-src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/why-cats-are-best-pets-1559241235.jpg?crop=0.586xw:0.880xh;0.0684xw,0.0611xh&resize=640:*" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1611522767119-3bc30ae6fed1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=7" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">awesomedjango</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>227</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>25</span>
                             </div>
                         </div>
                     </div>
@@ -172,21 +172,21 @@
                 </footer>
             </b-card>
 
-            <b-card border-variant="light" img-src="https://api.time.com/wp-content/uploads/2020/01/smudge-the-cat-interview.jpg?w=824&quality=70" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1592753096246-2272a0b5222b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=8" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">kirkj27</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>183</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>8</span>
                             </div>
                         </div>
                     </div>
@@ -196,21 +196,45 @@
                 </footer>
             </b-card>
 
-            <b-card border-variant="light" img-src="https://www.sciencenews.org/wp-content/uploads/2019/07/072319_ee_cat-allergy_feat.jpg" img-top>
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" img-top>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
-                            <b-avatar size="1.7rem"></b-avatar>
-                            <span class="ml-2 profile-username">anothermayk</span>
+                            <b-avatar src="https://loremflickr.com/320/240?random=9" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">asparagas</span>
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
-                                <span>246</span>
+                                <span>56</span>
                             </div>
                             <div class="comments d-inline ml-3">
                                 <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
-                                <span>32</span>
+                                <span>9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content my-2">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quod perferendis tenetur corporis quis harum magni suscipit minima, voluptatem...</p>
+                    </div>
+                </footer>
+            </b-card>
+
+            <b-card border-variant="light" img-src="https://images.unsplash.com/photo-1568267583152-ef581279c8ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" img-top>
+                <footer class="post-body">
+                    <div class="post-footer">
+                        <div>
+                            <b-avatar src="https://loremflickr.com/320/240?random=1" size="1.7rem"></b-avatar>
+                            <span class="ml-2 profile-username">huanyi</span>
+                        </div>
+                        <div class="post-actions">
+                            <div class="likes d-inline">
+                                <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar>
+                                <span>53</span>
+                            </div>
+                            <div class="comments d-inline ml-3">
+                                <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar>
+                                <span>5</span>
                             </div>
                         </div>
                     </div>
