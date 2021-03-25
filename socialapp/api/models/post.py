@@ -30,7 +30,7 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Post Id: {}, Author: {}, Comment: {}'.format(self.post.id, self.profile.slug, self.content)
+        return 'Post Id: {}, Author: {}, Comment: {}'.format(self.post.slug, self.profile.slug, self.content)
 
 
 class ArchivedPost(models.Model):
