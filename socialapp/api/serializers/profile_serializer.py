@@ -4,6 +4,15 @@ from api.models import Profile
 from .post_serializer import PostSerializer
 
 
+class RestAuthUserDetailWithProfileRelated(serializers.ModelSerializer):
+
+    profile = serializers.SlugRelatedField(slug_field='slug', read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'profile')
+
+
 class ProfileIsHiddenSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -21,6 +30,8 @@ class ProfileWithPostsSerializer(serializers.ModelSerializer):
 
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
+
+    gender = serializers.CharField(source='get_gender_display', read_only=True)
 
     class Meta:
         model = Profile

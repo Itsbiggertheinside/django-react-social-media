@@ -16,7 +16,7 @@
     color: rgb(var(--root_pink));
 }
 
-.btn:focus, input {
+.btn:focus, [role="button"], input, textarea, select {
     outline: none !important;
     box-shadow: none !important;
 }
@@ -50,4 +50,22 @@ a, a span {
 
 .profile-username {
     font-weight: 500;
+}
+
+.card-img-top:hover {
+    opacity: .9;
+    transform: translateY(-3px);
+    transition: .2s;
+}
+
+.nav-link:hover {
+    opacity: .9;
+    transform: translateY(-1px);
+    transition: .3s;
+}
+
+#detail img {
+    max-height: 1000px;
+    object-fit: contain;
+    object-position: center;
 }

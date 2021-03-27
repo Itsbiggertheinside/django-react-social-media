@@ -11,6 +11,7 @@ class ProfileReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = 'user__username'
 
     def get_serializer_class(self):
+        serializer = ProfileWithPostsSerializer
         profile = self.get_object()
         if profile.is_hidden:
             serializer = ProfileIsHiddenSerializer

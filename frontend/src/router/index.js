@@ -38,13 +38,13 @@ const routes = [
       import(/* webpackChunkName: "direct" */ "../views/Direct.vue")
   },
   {
-    path: "/saveds",
-    name: "Saveds",
+    path: "/likeds",
+    name: "Likeds",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "saveds" */ "../views/Saveds.vue")
+      import(/* webpackChunkName: "likeds" */ "../views/Likeds.vue")
   },
   {
     path: "/settings",
@@ -54,6 +54,15 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/Settings.vue")
+  },
+  {
+    path: "/detail/:slug",
+    name: "Detail",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "detail" */ "../views/Detail.vue")
   }
 ];
 

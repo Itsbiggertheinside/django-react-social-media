@@ -1,19 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.fields.related import ForeignKey
 from .profile import Profile
 
 
-# class Follows(models.Model):
-#     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+class FollowingList(models.Model):
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return '{}\'s follow list'.format(self.profile.slug)
+    def __str__(self):
+        return f'{self.profile.user.username}\'s follow list'
 
 
-# class Following(models.Model):
-#     follows = models.ForeignKey(Follows, on_delete=models.CASCADE)
-#     follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='follower')
-#     followed = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followed')
+class Follower(models.Model):
+    parent = ForeignKey(FollowingList, on_delete=models.CASCADE, related_name='followers')
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return '{0} follow to {1}'.format(self.follower.slug, self.followed.slug)
+    def __str__(self):
+        return f'{self.follower.user.username} follow {self.parent.profile.user.username}'
+
+
+class Followed(models.Model):
+    parent = ForeignKey(FollowingList, on_delete=models.CASCADE, related_name='followeds')
+    followed = ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.parent.profile.user.username} follow {self.followed.user.username}'

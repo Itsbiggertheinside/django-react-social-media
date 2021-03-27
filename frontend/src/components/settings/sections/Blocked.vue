@@ -1,7 +1,5 @@
 <template>
-    <main id='saveds'>
-        <h1>Kaydedilenler</h1>
-    </main>
+  
 </template>
 
 <script>

@@ -24,11 +24,23 @@
 <script>
 import Navbar from './components/Navbar'
 import LeftMenu from './components/LeftMenu';
+import { mapActions } from 'vuex'
+
+const username = sessionStorage.getItem('username')
 
 export default {
   components: {
     Navbar, 
     LeftMenu
+  },
+  methods: {
+    ...mapActions(['setFollowingList', 'setFollowedsPosts', 'setExplorePosts', 'setProfile', 'setLikedPosts'])
+  },
+  mounted() {
+    this.setFollowingList(),
+    this.setExplorePosts(),
+    this.setFollowedsPosts(),
+    this.setProfile(username)
   }
 };
 
