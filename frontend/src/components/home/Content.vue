@@ -1,26 +1,27 @@
 <template>
     <div>
         <h3>Gönderiler</h3>
-        <b-card-group columns class="my-4">
-            <div v-for="followed in followedsPosts" :key="followed.user">
-                <b-card v-for="post in followed" :key="post.slug" :img-src="post.image" img-top>
+        <b-card-group columns class="my-4" :key="componentKey">
+            <div v-for="followeds in followedsPosts" :key="followeds.slug">
+                <b-card v-for="post in followeds.followed.posts" :key="post.slug">
+                    <b-card-img @click="goDetailPage(post.slug)" :src="post.image" class="mb-2"></b-card-img>
                     <footer class="post-body">
                         <div class="post-footer">
                             <div>
-                                <b-avatar size="1.7rem"></b-avatar>
-                                <span class="ml-2 profile-username"></span>
+                                <b-avatar :src="post.owner.picture" size="1.7rem"></b-avatar>
+                                <span class="ml-2 profile-username">{{post.owner.username}}</span>
                             </div>
                             <div class="post-actions">
                                 <div class="likes d-inline">
-                                    <b-button variant="outline-light" @click="likePost({post_slug: post.slug})"><b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span></span></b-button>
+                                    <b-button variant="outline-light" @click="likePost({post_slug: post.slug}); forceRerender()"><b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span>{{post.likes_set.length}}</span></b-button>
                                 </div>
                                 <div class="comments d-inline">
-                                    <b-button variant="outline-light"><b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar><span></span></b-button>
+                                    <b-button variant="outline-light"><b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar><span>{{post.comment_set.length}}</span></b-button>
                                 </div>
                             </div>
                         </div>
                         <div class="post-content my-2">
-                            <p>{{post.content}} ...</p>
+                            <p>{{post.content.substring(0, 75)}} ...</p>
                         </div>
                     </footer>
                 </b-card>
@@ -37,19 +38,37 @@ export default {
         ...mapActions(
             {likePost: 'setLikedPost'}
         ),
+        goDetailPage(slug) {
+            this.$router.push('/detail/' + slug)
+        },
         makeToast(username) {
-        this.$bvToast.toast(`@${username} tarafından paylaşılan bir gönderiyi beğendin!`, {
-            title: '❤',
-            solid: true
-        })
+            this.$bvToast.toast(`@${username} tarafından paylaşılan bir gönderiyi beğendin!`, {
+                title: '❤',
+                solid: true
+            })
+        },
+        handleLikeCount() {
+            console.log('test')
+        },
+        forceRerender() {
+            this.componentKey += 1;
+            this.updateCount = 0;
         }
     },
     data: () => ({
-        currentUser: sessionStorage.getItem('username')
+        currentUser: sessionStorage.getItem('username'),
+        updateCount: 0,
+        componentKey: 0
     }),
+    updated() {
+        if(this.updateCount < 1) {
+            this.$store.dispatch('setFollowedsPosts')
+            this.updateCount += 1
+        }
+    },
     computed: {
         ...mapGetters({followedsPosts: 'getFollowedsPosts', likedPosts: 'getLikedPost'})
-    }
+    },
 }
 </script>
 

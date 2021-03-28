@@ -23,7 +23,7 @@
 
 a, a span {
     color: initial;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .btn.btn-outline-light {
@@ -52,7 +52,7 @@ a, a span {
     font-weight: 500;
 }
 
-.card-img-top:hover {
+.card-img:hover {
     opacity: .9;
     transform: translateY(-3px);
     transition: .2s;

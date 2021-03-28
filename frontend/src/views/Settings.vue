@@ -6,8 +6,7 @@
                 <Fields />
             </b-col>
             <b-col md="9">
-                <ProfileSettings />
-                <ChangePassword />
+                <router-view></router-view>
             </b-col>
         </b-row>
     </main>
@@ -15,14 +14,10 @@
 
 <script>
 import Fields from '../components/settings/Fields.vue'
-import ProfileSettings from '../components/settings/sections/ProfileSettings.vue'
-import ChangePassword from '../components/settings/sections/ChangePassword.vue'
 
 export default {
     components: {
-        Fields,
-        ProfileSettings,
-        ChangePassword
+        Fields
     }
 }
 </script>

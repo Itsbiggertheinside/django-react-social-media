@@ -13,54 +13,60 @@ const routes = [
   {
     path: "/profile",
     name: "Profile",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Profile.vue")
   },
   {
     path: "/explore",
     name: "Explore",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    
     component: () =>
       import(/* webpackChunkName: "explore" */ "../views/Explore.vue")
   },
   {
     path: "/direct",
     name: "Direct",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    
     component: () =>
       import(/* webpackChunkName: "direct" */ "../views/Direct.vue")
   },
   {
     path: "/likeds",
     name: "Likeds",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    
     component: () =>
       import(/* webpackChunkName: "likeds" */ "../views/Likeds.vue")
   },
   {
     path: "/settings",
     name: "Settings",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    children: [
+      {
+        path: 'profile',
+        component: () =>
+          import(/* webpackChunkName: "profileSettings" */ "../components/settings/sections/ProfileSettings.vue")
+      },
+      {
+        path: 'password',
+        component: () =>
+          import(/* webpackChunkName: "changePasswordSettings" */ "../components/settings/sections/ChangePassword.vue")
+      },
+      {
+        path: 'blockeds',
+        component: () =>
+          import(/* webpackChunkName: "blockedUsersSettings" */ "../components/settings/sections/Blocked.vue")
+      }
+    ],
+
+    
     component: () =>
       import(/* webpackChunkName: "settings" */ "../views/Settings.vue")
   },
   {
     path: "/detail/:slug",
     name: "Detail",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    
     component: () =>
       import(/* webpackChunkName: "detail" */ "../views/Detail.vue")
   }

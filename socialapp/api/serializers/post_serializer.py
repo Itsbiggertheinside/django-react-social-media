@@ -1,3 +1,4 @@
+from django.utils.timesince import timesince
 from rest_framework import serializers
 from api.models import Post, Likes, Comment, Followed
 
@@ -11,9 +12,23 @@ class LikesSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
 
+    username = serializers.SerializerMethodField(read_only=True)
+    profile_picture = serializers.SerializerMethodField(read_only=True)
+    created_at = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Comment
         fields = '__all__'
+        
+    def get_username(self, obj):
+        return obj.profile.user.username
+
+    def get_profile_picture(self, obj):
+        if obj.profile.picture:
+            return 'http://127.0.0.1:8000{}'.format(obj.profile.picture.url)
+
+    def get_created_at(self, obj):
+        return timesince(obj.created_at)
 
 
 class PostSerializer(serializers.ModelSerializer):

@@ -11,11 +11,11 @@
                         <p class="text-muted">Gönderi</p>
                     </b-col>
                     <b-col md="4" v-b-modal.modal-follower-list>
-                        <p class="font-weight-bolder h6">17</p>
+                        <p class="font-weight-bolder h6">{{follower_count}}</p>
                         <p class="text-muted">Takipçi</p>
                     </b-col>
                     <b-col md="4" v-b-modal.modal-followed-list>
-                        <p class="font-weight-bolder h6">213</p>
+                        <p class="font-weight-bolder h6">{{followed_count}}</p>
                         <p class="text-muted">Takip</p>
                     </b-col>
                 </b-row>
@@ -26,13 +26,17 @@
             <p>{{biography}}</p>
             <p class="text-muted h5">İnternet Sitesi</p>
             <p>{{webpage}}</p>
+            <div>
+                <b-button variant="info" class="mr-4" size="sm">Takip Et</b-button>
+                <b-button variant="info" class="mr-4" size="sm">Mesaj Gönder</b-button>
+            </div>
         </b-col>
     </b-row>
 </template>
 
 <script>
 export default {
-    props: ['username', 'name', 'picture', 'posts', 'follower', 'followed', 'biography', 'webpage']
+    props: ['username', 'name', 'picture', 'posts', 'follower_count', 'followed_count', 'biography', 'webpage']
 }
 </script>
 

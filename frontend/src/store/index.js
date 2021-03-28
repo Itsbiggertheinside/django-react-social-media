@@ -4,7 +4,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 const url = 'http://127.0.0.1:8000/api/'
-const headers = { 'Accept': 'application/json; text/plain', 'Content-Type': 'application/json; text/plain', 'Authorization': `Token ${sessionStorage.getItem('token')}` }
+const headers = { 'Accept': 'application/json; text/plain; multipart/form-data; image/jpeg; image/png;', 'Content-Type': 'application/json; text/plain; multipart/form-data; image/jpeg; image/png;', 'Authorization': `Token ${sessionStorage.getItem('token')}` }
 
 
 export default new Vuex.Store({
@@ -12,12 +12,16 @@ export default new Vuex.Store({
   state: {
     authToken: {},
     authenticatedUser: {},
+    changePassword: {},
+    profileSettings: {},
     followedsPosts: [],
     followingList: [],
     explorePosts: [],
     postDetail: {},
+    sendPost: {},
     profile: {},
-    likedPost: {}
+    likedPost: {},
+    comments: []
   },
 
   mutations: {
@@ -26,6 +30,12 @@ export default new Vuex.Store({
     },
     setAuthenticatedUser(state, payload) {
       state.authenticatedUser = payload
+    },
+    setChangePassword(state, payload) {
+      state.changePassword = payload
+    },
+    setProfileSettings(state, payload) {
+      state.profileSettings = payload
     },
     setFollowingList(state, payload) {
       state.followingList = payload
@@ -41,6 +51,12 @@ export default new Vuex.Store({
     },
     setLikedPost(state, payload) {
       state.likedPost = payload
+    },
+    setComments(state, payload) {
+      state.comments.push(payload)
+    },
+    setSendPost(state, payload) {
+      state.sendPost = payload
     },
     setPostDetail(state, payload) {
       state.postDetail = payload
@@ -70,6 +86,26 @@ export default new Vuex.Store({
       sessionStorage.setItem('profile', response.profile)
     },
 
+    async setChangePassword(state, {passwords}) {
+      const changePassword = await fetch(`${url}rest-auth/password/change/`, { 
+        method: 'POST', 
+        headers, 
+        body: JSON.stringify({ new_password1: passwords.new_password1, new_password2: passwords.new_password2, old_password: passwords.old_password }) 
+      })
+      const response = await changePassword.json()
+      state.commit('setChangePassword', response)
+    },
+
+    async setProfileSettings(state, {username, settings}) {
+      const profileSettings = await fetch(`${url}update-profile/${username}/`, { 
+        method: 'PUT', 
+        headers, 
+        body: JSON.stringify({name: settings.name, biography: settings.biography, webpage: settings.webpage, phone: settings.phone, gender: settings.gender, is_hidden: settings.is_hidden}) 
+      })
+      const response = await profileSettings.json()
+      state.commit('setProfileSettings', response)
+    },
+
     async setFollowingList(state) {
       const followingList = await fetch(`${url}following/?profile`, { headers })
       const response = await followingList.json()
@@ -83,7 +119,7 @@ export default new Vuex.Store({
     },
 
     async setExplorePosts(state) {
-      const explorePosts = await fetch(`${url}`, { headers })
+      const explorePosts = await fetch(`${url}post/`, { headers })
       const response = await explorePosts.json()
       state.commit('setExplorePosts', response)
     },
@@ -104,8 +140,28 @@ export default new Vuex.Store({
       state.commit('setLikedPost', response)
     },
 
+    async setSendPost(state, {post}) {
+      const sendPost = await fetch(`${url}post/`, { 
+        method: 'POST', 
+        headers, 
+        body: JSON.stringify({ profile: sessionStorage.getItem('profile'), content: post.content, image: post.image, slug: 'asjkdahskhd2hdk3' }) 
+      })
+      const response = await sendPost.json()
+      state.commit('setSendPost', response)
+    },
+
+    async setComments(state, {post_slug, content}) {
+      const comments = await fetch(`${url}comment-create/${post_slug}/`, { 
+        method: 'POST', 
+        headers, 
+        body: JSON.stringify({profile: sessionStorage.getItem('profile'), post: post_slug, content: content}) 
+      })
+      const response = await comments.json()
+      state.commit('setComments', response)
+    },
+
     async setPostDetail(state, post) {
-      const postDetail = await fetch(`${url}${post}/`, { headers })
+      const postDetail = await fetch(`${url}post/${post}/`, { headers })
       const response = await postDetail.json()
       state.commit('setPostDetail', response)
     }
@@ -116,12 +172,16 @@ export default new Vuex.Store({
   getters: {
     getAuthToken: state => state.authToken,
     getAuthenticatedUser: state => state.authenticatedUser,
+    getChangePassword: state => state.getChangePassword,
+    getProfileSettings: state => state.profileSettings,
     getFollowingList: state => state.followingList,
     getFollowedsPosts: state => state.followedsPosts,
     getExplorePosts: state => state.explorePosts,
     getProfile: state => state.profile,
     getLikedPost: state => state.likedPost,
-    getPostDetail: state => state.postDetail
+    getSendPost: state => state.sendPost,
+    getPostDetail: state => state.postDetail,
+    getComments: state => state.comments
   }
 
 });

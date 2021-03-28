@@ -1,23 +1,19 @@
 from rest_framework import generics, status, viewsets, mixins, permissions, filters
 from rest_framework.response import Response
+from uuid import uuid4
 from api.models import Profile, Post, Likes, Comment, ArchivedPost
 from api.serializers import PostSerializer, CommentSerializer, LikesSerializer, FollowedsSerializer
 from api.permissions import IsOwnerOrReadOnly
 
 
-class PostViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsOwnerOrReadOnly, )
 
-
-class PostCreateAPIView(generics.CreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
     def perform_create(self, serializer):
-        profile = self.request.user.profile
-        serializer.save(profile=profile)
+        url = uuid4().hex[:57]
+        serializer.save(slug=url)
 
 
 class PostLikeViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):

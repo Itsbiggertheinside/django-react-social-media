@@ -15,23 +15,38 @@ class RestAuthUserDetailWithProfileRelated(serializers.ModelSerializer):
 
 class ProfileIsHiddenSerializer(serializers.ModelSerializer):
 
+    username = serializers.SerializerMethodField(read_only=True)
+    following_counts = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Profile
         fields = '__all__'
 
+    def get_following_counts(self, obj):
+        return {'followers': obj.followinglist.followers.count(), 'followeds': obj.followinglist.followeds.count()}
+
+    def get_username(self, obj):
+        return obj.user.username
 
 class ProfileWithPostsSerializer(serializers.ModelSerializer):
 
+    username = serializers.SerializerMethodField(read_only=True)
     posts = PostSerializer(read_only=True, many=True)
+    following_counts = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Profile
         fields = '__all__'
 
+    def get_following_counts(self, obj):
+        return {'followers': obj.followinglist.followers.count(), 'followeds': obj.followinglist.followeds.count()}
+
+    def get_username(self, obj):
+        return obj.user.username
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
 
-    gender = serializers.CharField(source='get_gender_display', read_only=True)
+    gender = serializers.CharField(source='get_gender_display')
 
     class Meta:
         model = Profile

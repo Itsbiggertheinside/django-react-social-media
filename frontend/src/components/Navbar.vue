@@ -12,7 +12,7 @@
                 <b-navbar-nav class='ml-auto'>
                     <img class='mx-2 mt-1' src="https://img.icons8.com/ios/24/000000/appointment-reminders--v1.png"/>
                     <img class='mx-2 mt-1' src="https://img.icons8.com/ios/24/000000/chat-message--v1.png"/>
-                    <b-button size='sm' class='mx-2'>Gönderi Paylaş</b-button>
+                    <b-button size='sm' variant="info" class='mx-2'>Gönderi Paylaş</b-button>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>

@@ -1,5 +1,7 @@
 <template>
-  
+    <div>
+        <p>Blocked Users</p>
+    </div>
 </template>
 
 <script>

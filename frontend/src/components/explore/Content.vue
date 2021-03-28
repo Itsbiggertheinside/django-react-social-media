@@ -2,7 +2,8 @@
     <div class="my-4">
         <h3>Keşfet</h3>
         <b-card-group columns class="my-4">
-            <b-card @click="goDetailPage(post.slug)" v-for="post in followedsPosts" :key="post.slug" :img-src="post.image" img-top>
+            <b-card v-for="post in followedsPosts" :key="post.slug">
+                <b-card-img @click="goDetailPage(post.slug)" :src="post.image" class="mb-2"></b-card-img>
                 <footer class="post-body">
                     <div class="post-footer">
                         <div>
@@ -19,7 +20,7 @@
                         </div>
                     </div>
                     <div class="post-content my-2">
-                        <p>{{post.content.substring(0, 45)}} ...</p>
+                        <p>{{post.content.substring(0, 75)}} ...</p>
                     </div>
                 </footer>
             </b-card>

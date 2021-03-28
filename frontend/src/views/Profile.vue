@@ -2,10 +2,12 @@
     <div id="profile">
         <h3>Profil</h3>
         <Information 
-            :username="profile.get_username" 
+            :username="profile.username" 
             :name="profile.name" 
             :picture="profile.picture"
             :biography="profile.biography" 
+            :follower_count="profile.following_counts.followers"
+            :followed_count="profile.following_counts.followeds"
             :webpage="profile.webpage"
             :posts="profile.posts"
         />

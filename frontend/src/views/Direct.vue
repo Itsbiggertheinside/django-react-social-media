@@ -1,23 +1,15 @@
 <template>
   <div id="direct">
     <b-row>
-        <b-col md="2">
+        <b-col md="3">
             <b-nav vertical>
-                <router-link tag="b-nav-item" to="/" exact>
-                    <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span>Ana Sayfa</span>
-                </router-link>
-                <router-link tag="b-nav-item" to="/" exact>
-                    <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span>Ana Sayfa</span>
-                </router-link>
-                <router-link tag="b-nav-item" to="/" exact>
-                    <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span>Ana Sayfa</span>
-                </router-link>
-                <router-link tag="b-nav-item" to="/" exact>
-                    <b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span>Ana Sayfa</span>
-                </router-link>
+                <b-nav-item v-for="followed in followingList[0].followeds" :key="followed.id">
+                    <b-avatar class="mr-3 align-top" variant="light" :src="followed.picture" size="1.8rem"></b-avatar>
+                    <span>{{followed.username}}</span>
+                </b-nav-item>
             </b-nav>
         </b-col>
-        <b-col md="10">
+        <b-col md="9">
             <b-row>
                 <b-col sm="12">
                     <b-card border="dark">
@@ -61,8 +53,21 @@
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex'
 
+
+export default {
+    data() {
+        return {
+            
+        }
+    },
+    computed: {
+      ...mapGetters({followingList: 'getFollowingList'})
+    },
+    mounted() {
+        
+    }
 }
 </script>
 

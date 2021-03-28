@@ -5,32 +5,44 @@ from .profile_serializer import ProfileWithPostsSerializer
 
 class FollowersSerializer(serializers.ModelSerializer):
 
+    username = serializers.SerializerMethodField()
+    picture = serializers.SerializerMethodField()
+
     class Meta:
         model = Follower
         fields = '__all__'
 
+    def get_username(self, obj):
+        return obj.follower.user.username
+
+    def get_picture(self, obj):
+        return 'http://127.0.0.1:8000' + obj.follower.picture.url if obj.follower.picture else None
+
 
 class FollowedsSerializer(serializers.ModelSerializer):
+
+    username = serializers.SerializerMethodField()
+    picture = serializers.SerializerMethodField()
 
     class Meta:
         model = Followed
         fields = '__all__'
 
+    def get_username(self, obj):
+        return obj.followed.user.username
+
+    def get_picture(self, obj):
+        return 'http://127.0.0.1:8000' + obj.followed.picture.url if obj.followed.picture else None
+
 
 class FollowingListSerializer(serializers.ModelSerializer):
 
-    followers = serializers.SerializerMethodField(read_only=True)
-    followeds = serializers.SerializerMethodField(read_only=True)
+    followers = FollowersSerializer(read_only=True, many=True)
+    followeds = FollowedsSerializer(read_only=True, many=True)
 
     class Meta:
         model = FollowingList
         fields = '__all__'
-
-    def get_followers(self, obj):
-        return obj.followers.values('id', 'follower_id', 'follower_id__user__username')
-
-    def get_followeds(self, obj):
-        return obj.followeds.values('id', 'followed_id', 'followed_id__user__username')
 
 
 class FollowedProfilesPosts(serializers.ModelSerializer):

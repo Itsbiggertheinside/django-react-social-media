@@ -23,7 +23,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username + '\'s profile'
-
-    @property
-    def get_username(self):
-        return self.user.username

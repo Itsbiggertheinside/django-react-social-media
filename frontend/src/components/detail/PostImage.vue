@@ -18,8 +18,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-    props: ['post']
+    props: ['post'],
+    methods: {
+        ...mapActions({likePost: 'setLikedPost'})
+    }
 }
 </script>
 

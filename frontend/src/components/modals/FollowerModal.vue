@@ -1,9 +1,12 @@
 <template>
     <div>
         <b-modal id="modal-follower-list" scrollable title="Takipçiler">
-            <p v-for="follower in followers" :key="follower.followed_id__user__username">
-                {{follower.follower_id__user__username}}
-            </p>
+            <b-nav vertical>
+                <b-nav-item v-for="follower in followers" :key="follower.id">
+                    <b-avatar class="mr-1 align-top" variant="light" :src="follower.picture" size="1.4rem"></b-avatar>
+                    <span>{{follower.username}}</span>
+                </b-nav-item>
+            </b-nav>
         </b-modal>
     </div>
 </template>

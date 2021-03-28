@@ -1,33 +1,26 @@
 <template>
     <div class="my-4">
         <b-card-group columns class="my-4">
-            <b-card v-for="post in posts" :key="post.slug" @click="likePost({post_slug: post.slug})" :img-src="post.image" img-top></b-card>
+            <b-card v-for="post in posts" :key="post.slug">
+              <b-card-img @click="goDetailPage(post.slug)" :src="post.image"></b-card-img>
+            </b-card>
         </b-card-group>
-        <b-button @click="setAuthToken({email: 'tufankilinc@outlook.com', password: 'admin'})">Giriş Yap</b-button>
-        <b-button @click="setAuthenticatedUser()">Get Current User</b-button>
-        <p>{{token}}</p>
-        <p>{{authenticatedUser}}</p>
     </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-
 export default {
   props: ['posts'],
   methods: {
-    ...mapActions(
-      {likePost: 'setLikedPost', setAuthToken: 'setAuthToken', setAuthenticatedUser: 'setAuthenticatedUser'}
-    ),
+    goDetailPage(slug) {
+      this.$router.push('/detail/' + slug)
+    },
     makeToast(username) {
       this.$bvToast.toast(`@${username} tarafından paylaşılan bir gönderiyi beğendin!`, {
         title: '❤',
         solid: true
       })
     }
-  },
-  computed: {
-    ...mapGetters({likedPosts: 'getLikedPost', token: 'getAuthToken', authenticatedUser: 'getAuthenticatedUser'})
   }
 }
 </script>
