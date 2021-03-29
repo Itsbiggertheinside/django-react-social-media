@@ -41,22 +41,12 @@ export default {
         goDetailPage(slug) {
             this.$router.push('/detail/' + slug)
         },
-        makeToast(username) {
-            this.$bvToast.toast(`@${username} tarafından paylaşılan bir gönderiyi beğendin!`, {
-                title: '❤',
-                solid: true
-            })
-        },
-        handleLikeCount() {
-            console.log('test')
-        },
         forceRerender() {
             this.componentKey += 1;
             this.updateCount = 0;
         }
     },
     data: () => ({
-        currentUser: sessionStorage.getItem('username'),
         updateCount: 0,
         componentKey: 0
     }),

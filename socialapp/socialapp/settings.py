@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'corsheaders',
+    # 'channels',
 
     'api.apps.ApiConfig',
 ]
@@ -81,6 +82,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'socialapp.wsgi.application'
+
+# CHANNELS
+# ASGI_APPLICATION = "socialapp.asgi.application"
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
 
 
 # Database
@@ -170,3 +182,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8081",
     "http://127.0.0.1:8081",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True

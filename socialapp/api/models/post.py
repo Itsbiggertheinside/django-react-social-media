@@ -31,6 +31,9 @@ class Comment(models.Model):
     def __str__(self):
         return 'Post Id: {}, Author: {}, Comment: {}'.format(self.post.slug, self.profile.slug, self.content)
 
+    class Meta:
+        ordering = ['-created_at']
+
 
 class ArchivedPost(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

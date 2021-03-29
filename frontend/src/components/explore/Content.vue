@@ -1,8 +1,8 @@
 <template>
     <div class="my-4">
         <h3>Keşfet</h3>
-        <b-card-group columns class="my-4">
-            <b-card v-for="post in followedsPosts" :key="post.slug">
+        <b-card-group columns class="my-4" :key="componentKey">
+            <b-card v-for="post in exploredPosts" :key="post.slug">
                 <b-card-img @click="goDetailPage(post.slug)" :src="post.image" class="mb-2"></b-card-img>
                 <footer class="post-body">
                     <div class="post-footer">
@@ -12,7 +12,7 @@
                         </div>
                         <div class="post-actions">
                             <div class="likes d-inline">
-                                <b-button variant="outline-light" @click="likePost({post_slug: post.slug})"><b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span>{{post.likes_set.length}}</span></b-button>
+                                <b-button variant="outline-light" @click="likePost({post_slug: post.slug}); forceRerender()"><b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/like--v1.png" size="1.4rem"></b-avatar><span>{{post.likes_set.length}}</span></b-button>
                             </div>
                             <div class="comments d-inline">
                                 <b-button variant="outline-light"><b-avatar class="mr-1 align-top" variant="light" src="https://img.icons8.com/ios/24/000000/topic.png" size="1.4rem"></b-avatar><span>{{post.comment_set.length}}</span></b-button>
@@ -39,15 +39,23 @@ export default {
         goDetailPage(slug) {
             this.$router.push('/detail/' + slug)
         },
-        makeToast(username) {
-        this.$bvToast.toast(`@${username} tarafından paylaşılan bir gönderiyi beğendin!`, {
-            title: '❤',
-            solid: true
-        })
+        forceRerender() {
+            this.componentKey += 1;
+            this.updateCount = 0;
+        }
+    },
+    data: () => ({
+        updateCount: 0,
+        componentKey: 0
+    }),
+    updated() {
+        if(this.updateCount < 1) {
+            this.$store.dispatch('setExplorePosts')
+            this.updateCount += 1
         }
     },
     computed: {
-        ...mapGetters({followedsPosts: 'getExplorePosts', likedPost: 'getLikedPost'})
+        ...mapGetters({exploredPosts: 'getExplorePosts', likedPost: 'getLikedPost'})
     }
 }
 </script>

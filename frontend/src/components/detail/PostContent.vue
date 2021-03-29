@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :key="componentKey">
         <div>
             <b-avatar :src="info.owner.picture" size="1.7rem"></b-avatar>
             <span class="ml-2 profile-username">{{info.owner.username}}</span>
@@ -12,7 +12,7 @@
             </b-input-group-append>
         </b-input-group>
         <div  class="my-4">
-            <Comments :key="componentKey" :comments="info.comment_set" />
+            <Comments :comments="info.comment_set" />
         </div>
     </div>
 </template>
@@ -44,8 +44,9 @@ export default {
     },
     updated() {
         if(this.updateCount < 1) {
-            this.$store.dispatch('setComments')
+            this.$store.dispatch('setPostDetail', this.$route.params.slug)
             this.updateCount += 1
+            this.commentData.content = ''
         }
     }
 }
