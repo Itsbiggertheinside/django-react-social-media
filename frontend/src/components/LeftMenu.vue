@@ -8,7 +8,7 @@
                 <p class="text-muted h6">@{{profile.username}}</p>
                 <b-row class="mt-4">
                     <b-col md="4">
-                        <p class="font-weight-bolder h6">{{profile.posts.length}}</p>
+                        <p class="font-weight-bolder h6">{{profile.posts ? profile.posts.length : 0}}</p>
                         <p class="text-muted">Gönderi</p>
                     </b-col>
                     <b-col md="4" v-b-modal.modal-follower-list>

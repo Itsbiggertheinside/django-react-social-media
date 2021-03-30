@@ -15,3 +15,9 @@ class IsOwnerOrReadOnlyForProfile(BasePermission):
         if request.method in SAFE_METHODS:
             return True 
         return request.user and request.user.profile == obj
+
+
+# class IsChannelMemberOrAccessDenied(BasePermission):
+
+#     def has_object_permission(self, request, view, obj):
+#         return False

@@ -21,7 +21,10 @@ export default new Vuex.Store({
     sendPost: {},
     profile: {},
     likedPost: {},
-    comments: []
+    comments: [],
+    profileChannels: [],
+    currentChannelMessages: [],
+    sendDirectMessage: {},
   },
 
   mutations: {
@@ -48,6 +51,15 @@ export default new Vuex.Store({
     },
     setProfile(state, payload) {
       state.profile = payload
+    },
+    setProfileChannels(state, payload) {
+      state.profileChannels = payload
+    },
+    setCurrentChannelMessages(state, payload) {
+      state.currentChannelMessages = payload
+    },
+    setSendDirectMessage(state, payload) {
+      state.sendDirectMessage = payload
     },
     setLikedPost(state, payload) {
       state.likedPost = payload
@@ -130,6 +142,18 @@ export default new Vuex.Store({
       state.commit('setProfile', response)
     },
 
+    async setProfileChannels(state) {
+      const profileChannels = await fetch(`${url}direct/channel/`, { headers })
+      const response = await profileChannels.json()
+      state.commit('setProfileChannels', response)
+    },
+
+    async setCurrentChannelMessages(state, directChannelCode) {
+      const currentChannelMessages = await fetch(`${url}direct/channel/${directChannelCode}/`, { headers })
+      const response = await currentChannelMessages.json()
+      state.commit('setCurrentChannelMessages', response)
+    },
+
     async setLikedPost(state, {post_slug}) {
       const likedPost = await fetch(`${url}create/like/`, { 
         method: 'POST', 
@@ -148,6 +172,16 @@ export default new Vuex.Store({
       })
       const response = await sendPost.json()
       state.commit('setSendPost', response)
+    },
+
+    async setSendDirectMessage(state, {directChannelCode, directMessage}) {
+      const sendDirectMessage = await fetch(`${url}direct/message/`, { 
+        method: 'POST', 
+        headers, 
+        body: JSON.stringify({ sender: sessionStorage.getItem('profile'), room: directChannelCode, message: directMessage }) 
+      })
+      const response = await sendDirectMessage.json()
+      state.commit('setSendDirectMessage', response)
     },
 
     async setComments(state, {post_slug, content}) {
@@ -178,6 +212,9 @@ export default new Vuex.Store({
     getFollowedsPosts: state => state.followedsPosts,
     getExplorePosts: state => state.explorePosts,
     getProfile: state => state.profile,
+    getProfileChannels: state => state.profileChannels,
+    getCurrentChannelMessages: state => state.currentChannelMessages,
+    getSendDirectMessage: state => state.sendDirectMessage,
     getLikedPost: state => state.likedPost,
     getSendPost: state => state.sendPost,
     getPostDetail: state => state.postDetail,

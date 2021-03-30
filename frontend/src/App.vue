@@ -27,6 +27,7 @@ import LeftMenu from './components/LeftMenu';
 import { mapActions } from 'vuex'
 
 const username = sessionStorage.getItem('username')
+// const profile = sessionStorage.getItem('profile')
 
 export default {
   components: {
@@ -34,12 +35,13 @@ export default {
     LeftMenu
   },
   methods: {
-    ...mapActions(['setFollowingList', 'setFollowedsPosts', 'setExplorePosts', 'setProfile', 'setLikedPosts'])
+    ...mapActions(['setFollowingList', 'setFollowedsPosts', 'setExplorePosts', 'setProfile', 'setLikedPosts', 'setProfileChannels'])
   },
   mounted() {
     this.setFollowingList(),
     this.setExplorePosts(),
     this.setFollowedsPosts(),
+    this.setProfileChannels()
     this.setProfile(username)
   }
 };
