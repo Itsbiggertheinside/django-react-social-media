@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'corsheaders',
-    # 'channels',
+    'channels',
 
     'api.apps.ApiConfig',
 ]
@@ -84,7 +84,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'socialapp.wsgi.application'
 
 # CHANNELS
-# ASGI_APPLICATION = "socialapp.asgi.application"
+ASGI_APPLICATION = 'socialapp.asgi.application'
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -93,6 +93,11 @@ WSGI_APPLICATION = 'socialapp.wsgi.application'
 #         },
 #     },
 # }
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 
 # Database

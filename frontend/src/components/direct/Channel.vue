@@ -19,7 +19,7 @@
                 <b-form-input type="text" v-model="message" placeholder="Mesajınız"></b-form-input>
 
                 <b-input-group-append>
-                    <b-button @click="sendMessage({directChannelCode: channelCode, directMessage: message}); reRenderer(channelCode)" variant="outline-info">Gönder</b-button>
+                    <b-button @click="sendMessage(message)" variant="outline-info">Gönder</b-button>
                 </b-input-group-append>
             </b-input-group>
         </b-col>
@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+// import { mapActions } from 'vuex'
 
 export default {
-    props: ['channelCode', 'messages', 'reRenderer'],
+    props: ['sendMessage', 'messages'],
     methods: {
-        ...mapActions({sendMessage: 'setSendDirectMessage'})
+        // ...mapActions({sendMessage: 'setSendDirectMessage'})
     },
     data() {
         return {

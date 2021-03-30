@@ -1,1 +1,0 @@
-Channels ve Rest Framework iletişimi sağlanamadı, şimdilik askıya kaldırıldı.

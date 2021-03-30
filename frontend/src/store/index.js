@@ -4,7 +4,11 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 const url = 'http://127.0.0.1:8000/api/'
-const headers = { 'Accept': 'application/json; text/plain; multipart/form-data; image/jpeg; image/png;', 'Content-Type': 'application/json; text/plain; multipart/form-data; image/jpeg; image/png;', 'Authorization': `Token ${sessionStorage.getItem('token')}` }
+const headers = { 
+  'Accept': 'application/json, text/plain, */*', 
+  'Content-Type': 'application/json', 
+  'Authorization': `Token ${sessionStorage.getItem('token')}` 
+}
 
 
 export default new Vuex.Store({
@@ -25,6 +29,11 @@ export default new Vuex.Store({
     profileChannels: [],
     currentChannelMessages: [],
     sendDirectMessage: {},
+
+    // WEBSOCKET STATES
+    wsStatus: '',
+    wsDirectSocket: '',
+    wsDirectMessages: []
   },
 
   mutations: {
@@ -72,6 +81,19 @@ export default new Vuex.Store({
     },
     setPostDetail(state, payload) {
       state.postDetail = payload
+    },
+
+    // WEBSOCKET MUTATIONS
+    wsSetStatus(state, payload) {
+      state.wsStatus = payload
+    },
+
+    wsSetDirectSocket(state, payload) {
+      state.wsDirectSocket = payload
+    },
+
+    wsSetDirectMessages(state, payload) {
+      state.wsDirectMessages.push(payload)
     }
   },
 
@@ -198,6 +220,25 @@ export default new Vuex.Store({
       const postDetail = await fetch(`${url}post/${post}/`, { headers })
       const response = await postDetail.json()
       state.commit('setPostDetail', response)
+    },
+
+    // WEBSOCKET ACTIONS
+    async setDirectWebSocketConnect(state, directCode) {
+
+      const socket = new WebSocket(`ws://127.0.0.1:8000/ws/direct/${directCode}/`)
+      state.commit('wsSetDirectSocket', socket)
+      socket.onopen = () => {
+        state.commit('wsSetStatus', 'connected')
+        socket.onmessage = ({data}) => {
+          state.commit('wsSetDirectMessages', JSON.parse(data))
+        }
+      }
+
+    },
+    
+    async wsSendDirectMessage({getters}, message) {
+      const socket = getters.wsGetDirectSocket
+      socket.send(JSON.stringify({'username': sessionStorage.getItem('username'), 'message': message}))
     }
   },
 
@@ -218,7 +259,12 @@ export default new Vuex.Store({
     getLikedPost: state => state.likedPost,
     getSendPost: state => state.sendPost,
     getPostDetail: state => state.postDetail,
-    getComments: state => state.comments
+    getComments: state => state.comments,
+
+    // WEBSOCKET GETTERS
+    wsGetStatus: state => state.wsStatus,
+    wsGetDirectSocket: state => state.wsDirectSocket,
+    wsGetDirectMessages: state => state.wsDirectMessages
   }
 
 });

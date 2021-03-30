@@ -1,29 +1,42 @@
+import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 class DirectConsumer(AsyncWebsocketConsumer):
-    groups = ["broadcast"]
 
     async def connect(self):
-        # Called on connection.
-        # To accept the connection call:
-        await self.accept()
-        # Or accept the connection and specify a chosen subprotocol.
-        # A list of subprotocols specified by the connecting client
-        # will be available in self.scope['subprotocols']
-        await self.accept("subprotocol")
-        # To reject the connection, call:
-        await self.close()
+        self.direct_code = self.scope['url_route']['kwargs']['direct_code']
+        self.direct_group_code = 'direct_%s' % self.direct_code
 
-    async def receive(self, text_data=None, bytes_data=None):
-        # Called with either text_data or bytes_data for each frame
-        # You can call:
-        await self.send(text_data="Hello world!")
-        # Or, to send a binary frame:
-        await self.send(bytes_data="Hello world!")
-        # Want to force-close the connection? Call:
-        await self.close()
-        # Or add a custom WebSocket error code!
-        await self.close(code=4123)
+        await self.channel_layer.group_add(
+            self.direct_group_code, self.channel_name
+        )
+        
+        await self.accept()
 
     async def disconnect(self, close_code):
-        pass
+        
+        await self.channel_layer.group_discard(
+            self.direct_group_code, self.channel_name
+        )
+
+    async def receive(self, text_data=None):
+        text_data_json = json.loads(text_data)
+        username = text_data_json['username']
+        message = text_data_json['message']
+
+        await self.channel_layer.group_send(
+            self.direct_group_code, {
+                'type': 'direct_channel_message',
+                'username': username,
+                'message': message
+            }
+        )
+
+    async def direct_channel_message(self, event):
+        username = event['username']
+        message = event['message']
+
+        await self.send(text_data=json.dumps({
+            'username': username,
+            'message': message
+        }))
